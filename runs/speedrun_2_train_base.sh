@@ -19,7 +19,7 @@ mkdir -p $NANOCHAT_BASE_DIR
 # Python venv setup with uv
 
 # install the repo dependencies
-uv sync --extra gpu
+uv sync --extra gpu --cache-dir /tmp/uv-cache  # /workspaceにuvキャッシュが保存されてエラーが出ないように修正
 # activate venv so that `python` uses the project's venv instead of system python
 source .venv/bin/activate
 
