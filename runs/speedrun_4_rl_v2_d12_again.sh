@@ -44,7 +44,7 @@ torchrun --standalone --nproc_per_node=1 \
     -m scripts.chat_rl -- \
     --save-every 20 \
     --eval-every 120 \
-    --eval-samples 100 \
+    --eval-examples 100 \
     --run=$WANDB_RUN
 
 # RL後のcheckpointを評価
