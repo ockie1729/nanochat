@@ -13,6 +13,8 @@ Usage (drop-in replacement for FA3):
     # Inference (with KV cache)
     y = flash_attn.flash_attn_with_kvcache(q, k_cache, v_cache, k=k, v=v, ...)
 """
+import traceback
+
 import torch
 import torch.nn.functional as F
 
@@ -45,6 +47,7 @@ def _load_flash_attention_3():
                 return None
 
     except Exception:
+        traceback.print_exc()
         return None
 
 
