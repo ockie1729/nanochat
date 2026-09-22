@@ -42,6 +42,9 @@ WANDB_RUN="d${DEPTH}_base_training_again"
 # GSM8KでRL
 torchrun --standalone --nproc_per_node=1 \
     -m scripts.chat_rl -- \
+    --save-every 20 \
+    --eval-every 120 \
+    --eval-samples 100 \
     --run=$WANDB_RUN
 
 # RL後のcheckpointを評価
