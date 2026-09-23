@@ -1,7 +1,7 @@
 #!/bin/bash
 # 完了済み d12 と総学習トークン数をそろえ、d3・6・9・15 を事前学習する。
 # d12 のログで確認した学習設定を直接指定する。
-# 実行方法: bash runs/speedrun_2_train_base_scaling.sh
+# 実行方法: bash runs/scaling_laws_for_parameters.sh
 # トークナイザとデータファイル一覧は d12 の学習時と同じものを使用する。
 set -euo pipefail
 
@@ -27,11 +27,8 @@ source .venv/bin/activate
 
 # チェックポイントは標準の base_checkpoints/d{DEPTH} に保存する。
 for DEPTH in "${DEPTHS[@]}"; do
-    # WANDB_RUN=scaling などを指定すると、各 depth の結果を Wandb に記録する。
-    RUN=dummy
-    if [[ "${WANDB_RUN:-dummy}" != dummy ]]; then
-        RUN="${WANDB_RUN}_d${DEPTH}"
-    fi
+    # 各 depth の結果を Wandb の nanochat プロジェクトに記録する。
+    RUN="scaling_d${DEPTH}"
     echo "Training d${DEPTH}: $((NUM_ITERATIONS * TOTAL_BATCH_SIZE)) tokens"
     # ステップ数と総バッチを明示して学習トークン数を固定する。
     # 比率は depth に応じた既存の最適化補正にも使うため、正の値を維持する。
